@@ -77,3 +77,6 @@ plt.title('Confusion Matrix')
 plt.ylabel('Actual Truth')
 plt.xlabel('Model Prediction')
 plt.show()
+import joblib
+joblib.dump(rf_model, 'model.joblib')
+joblib.dump(scaler, 'scaler.joblib') # Don't forget the scaler!
