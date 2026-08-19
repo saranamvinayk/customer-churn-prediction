@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 # 1. Load the Data
 print("Loading data...")
-df = pd.read_csv('data/telco_churn.csv')
+df = pd.read_csv('data/telco.csv')
 
 # 2. Preprocessing & Cleaning (The 'Gotcha' Fix)
 print("Cleaning data...")
