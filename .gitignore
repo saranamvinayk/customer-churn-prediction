@@ -1,0 +1,9 @@
+# Ignore a specific file
+config.json
+
+# Ignore a specific folder (include the trailing slash)
+src/__pycache__*
+
+# Ignore all files ending with .log
+*.log
+*.joblib
