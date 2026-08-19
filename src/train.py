@@ -13,12 +13,28 @@ df = pd.read_csv('data/telco.csv')
 # 2. Preprocessing & Cleaning (The 'Gotcha' Fix)
 print("Cleaning data...")
 # Drop customerID as it has no predictive value
-df = df.drop('customerID', axis=1)
+df = df.drop('CustomerID', axis=1)
 
 # Fix the TotalCharges column: coerce errors to NaN, then fill with 0
-df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce').fillna(0)
+df['TotalCharges'] = pd.to_numeric(df['Total Charges'], errors='coerce').fillna(0)
 
 # Map the target variable 'Churn' from Yes/No to 1/0
+
+# --- Start automatic churn column correction ---
+churn_col_name = None
+for col in df.columns:
+    if 'churn' in col.lower():
+        churn_col_name = col
+        break
+
+if churn_col_name:
+    if churn_col_name != 'Churn':
+        df = df.rename(columns={churn_col_name: 'Churn'})
+    print(f"'Churn' column identified as '{churn_col_name}' and standardized.")
+else:
+    raise KeyError("Error: 'Churn' column not found after checking case-insensitive variations. Available columns: " + str(df.columns.tolist()))
+# --- End automatic churn column correction ---
+
 df['Churn'] = df['Churn'].map({'Yes': 1, 'No': 0})
 
 # 3. Feature Engineering (One-Hot Encoding)
