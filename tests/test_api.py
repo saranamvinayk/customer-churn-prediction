@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from src.api import app, EXPECTED_FEATURES
 
+
 client = TestClient(app)
 
 def test_health_check():
