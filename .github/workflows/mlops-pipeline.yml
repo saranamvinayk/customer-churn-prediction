@@ -20,12 +20,13 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest httpx
+        pip install pytest
         pip install -r requirements.txt
 
     - name: Run Pytest
+      # THE FIX: Using 'python -m' forces Python to recognize the 'src' folder
       run: |
-       PYTHONPATH=${{ github.workspace }} pytest tests/
+        python -m pytest tests/
 
     - name: Build Docker Image
       run: |
